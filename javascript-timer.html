@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Javascript Timer</title>
+<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+<script>
+function myTimer() {
+            var valueTimer = $('#hdnTimer').val();
+   
+            if (valueTimer > 0) {
+                valueTimer = (valueTimer - 0.01).toFixed(2);
+
+                hours = (valueTimer / 3600).toString().split('.')[0];
+                mins = ((valueTimer % 3600) / 60).toString().split('.')[0];
+                secs = ((valueTimer % 3600) % 60).toString().split('.')[0];
+                milliseconds = ((valueTimer % 3600) % 60).toFixed(2).toString().split('.')[1];
+                
+
+                if (hours.length == 1) hours = '0' + hours;
+                if (mins.length == 1) mins = '0' + mins;
+                if (secs.length == 1) secs = '0' + secs;
+                if (milliseconds.length == 1) milliseconds = '0' + milliseconds;
+                $('#idTimerLCD').text(hours + ':' + mins + ':' + secs + ':'+ milliseconds );
+                
+                $('#hdnTimer').val(valueTimer);
+
+                document.title = $('#idTimerLCD').text(); 
+
+            } else {
+                valueTimer =0;
+                alert(" Your time is up ! \n\n Let's see the Result & Statistics of the Test.");
+               
+                stopTimer();
+
+            }
+        }
+       var myVar = '';
+       myVar = setInterval(function() {
+                            myTimer()
+                        }, 10);
+                        
+function stopTimer() {
+            clearInterval(myVar);
+}
+</script>
+
+</head>
+<body>
+<em title="Javascript timer"></em>
+<p id="idTimerLCD"></p>
+
+<input type="text" value="10" id="hdnTimer">
+
+</body>
+</html>
